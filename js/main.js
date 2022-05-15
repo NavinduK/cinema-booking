@@ -20,31 +20,20 @@ function showRegisterForm() {
 }
 
 function RegistrationAjax(e) {
-    // console.log("asse");
-
-
     $.post("registration.php", function () {
         var userName = $('#registrationName').val();
         var password = $('#registrationPassword').val();
         var re_password = $('#registrationPassword_confirmation').val();
 
         if (!userName == "") {
-
             if (!password == "") {
-
                 if (!re_password == "") {
-
                     if (!(password == re_password)) {
                         shakeModal("password didn't match");
                     } else {
-                        // window.location.replace("about.html"); 
-
                         $.post('registration.php', { postName: userName, postPassword: password },
                             function (data) {
-
-
                                 if (data == 1) {
-                                    //window.location.replace("problem.php"); 
                                     registrationComplete();
                                 }
                                 if (data == 2) {
@@ -54,7 +43,6 @@ function RegistrationAjax(e) {
                                     alert("please try again");
                                 }
                             });
-
                     }
 
                 } else {
@@ -64,14 +52,9 @@ function RegistrationAjax(e) {
                 shakeModal("password cannot be empty");
             }
         } else {
-
             shakeModal("username cannot be empty");
-
         }
-
-
     });
-
     e.preventDefault();
 
 }
@@ -98,31 +81,27 @@ function showLoginForm() {
 }
 
 function loginAjax(check) {
-
-
     $.post("index.php", function () {
         var userName = $('#userName').val();
         var password = $('#password').val();
 
         if (userName == "" || password == "") {
-
             shakeModal("Username or Password cannot be empty");
-
         } else {
             $.post('logIn.php', { postName: userName, postPassword: password },
                 function (data) {
-                    if (data == 1) {
+                    if (data.split(",")[0] == 1) {
+                        localStorage.setItem('user', data.split(",")[1]);
                         window.location.replace("adminpage.php");
-                    } else if (data == 2) {
-                        window.location.replace("index.php");
+                    } else if (data.split(",")[0] == 2) {
+                        localStorage.setItem('user', data.split(",")[1]);
+                        location.reload();
                     } else {
                         shakeModal("Wrong Username or Password");
                     }
                 });
         }
-
     });
-
 }
 
 function shakeModal(error) {
@@ -144,4 +123,8 @@ function registrationComplete() {
     setTimeout(function () {
         $('#loginModal .modal-dialog').removeClass('');
     }, 1000);
+}
+
+function logout() {
+    localStorage.removeItem('user');
 }

@@ -11,7 +11,8 @@ include 'db.php'; ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/customerPanel.css">
 	<link rel="stylesheet" type="text/css" href="css/dark.css">
-	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="css/style.css" rel="stylesheet">
 
 	<style type="text/css">
 		.boxStyle {
@@ -43,7 +44,6 @@ include 'db.php'; ?>
 					<h3 class="title">
 						<?php
 						$movieId = $_GET['id'];
-						$_SESSION['movieId'] = $movieId;
 						$res = $conn->query("select * from movielist where movieId=$movieId;");
 						$row = $res->fetch();
 

@@ -2,6 +2,7 @@ const container = document.querySelector('.container-b');
 const seats = document.querySelectorAll('.row .seat:not(.occupied)');
 const count = document.getElementById('count');
 const total = document.getElementById('total');
+const booknow = document.getElementById('booknow');
 const movieSelect = document.getElementById('movie');
 
 let ticketPrice = 20;
@@ -9,16 +10,17 @@ let ticketPrice = 20;
 populateUI();
 
 // Save selected movie index and price
-function setMovieData(movieIndex, moviePrice) {
-  localStorage.setItem('selectedMovieIndex', movieIndex);
-  localStorage.setItem('selectedMoviePrice', moviePrice);
-}
+// function setMovieData(movieIndex, moviePrice) {
+//   localStorage.setItem('selectedMovieIndex', movieIndex);
+//   localStorage.setItem('selectedMoviePrice', moviePrice);
+// }
 
 // Update total and count
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
   const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
+  console.log(JSON.stringify(seatsIndex));
 
   localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
@@ -30,6 +32,9 @@ function updateSelectedCount() {
 
 // Get data from localstorage and populate UI
 function populateUI() {
+  if (!("user" in localStorage))
+    $('#loginModal').modal('show');
+
   const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
 
   if (selectedSeats !== null && selectedSeats.length > 0) {
@@ -59,14 +64,28 @@ function populateUI() {
 
 // Seat click event
 container.addEventListener('click', e => {
-  console.log("clicked");
   if (
     e.target.classList.contains('seat') &&
     !e.target.classList.contains('occupied')
   ) {
-  console.log("sear");
-  e.target.classList.toggle('selected');
+    e.target.classList.toggle('selected');
 
     updateSelectedCount();
   }
+});
+
+// Seat click event
+booknow.addEventListener('click', e => {
+  $.post('logIn.php', { postName: userName, postPassword: password },
+    function (data) {
+      if (data.split(",")[0] == 1) {
+        localStorage.setItem('user', data.split(",")[1]);
+        window.location.replace("adminpage.php");
+      } else if (data.split(",")[0] == 2) {
+        localStorage.setItem('user', data.split(",")[1]);
+        location.reload();
+      } else {
+        shakeModal("Wrong Username or Password");
+      }
+    });
 });

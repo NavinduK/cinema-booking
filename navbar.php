@@ -5,11 +5,10 @@
 
     .navbar-toggle {
         border: 1px solid #2ca8ff;
-
     }
 </style>
 <div class="navbar-wrapper">
-    <div class="">
+    <div>
 
         <nav class="navbar navbar-dark bg-dark navbar-static-top" style="background-color: #222933;">
             <div class="container">
@@ -52,7 +51,7 @@
                                 $res = $conn->query("select * from user where userId='$userId';");
                                 $row = $res->fetch();
                                 echo "
-                                        <a href='logout.php'><span class='glyphicon glyphicon-off'></span> Logout </a>";
+                                        <a href='logout.php' onclick='return logout()'><span class='glyphicon glyphicon-off'></span> Logout </a>";
                             } else {
                                 echo "  
                                         <a href='javascript:void(0)' onclick='openLoginModal();'><span class='glyphicon glyphicon-log-in'></span> Login </a>";
@@ -67,3 +66,63 @@
 
     </div>
 </div>
+
+<div class="modal fade login" id="loginModal">
+      <div class="modal-dialog modal-dialog-centered login animated">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+
+          <!-- login -->
+          <div class="modal-body">  
+            <div class="box">
+              <div class="content">
+
+                <div class="error"></div>
+                <div class="form loginBox">
+                  <form method="post" action="index.php" accept-charset="UTF-8">
+                    <input id="userName" class="form-control" type="text" placeholder="Username" name="Username">
+                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                    <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Registration -->
+            <div class="box" id="RegistrationBox">
+              <div class="content registerBox" style="display:none;">
+                <div class="form">
+                  <form method="post" html="{:multipart=>true}" data-remote="true" action="index.php" accept-charset="UTF-8">
+                    <input id="registrationName" class="form-control" type="text" placeholder="username" name="username">
+                    <input id="registrationPassword" class="form-control" type="password" placeholder="Password" name="password">
+                    <input id="registrationPassword_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+                    <input class="btn btn-default btn-register" type="submit" value="Create account" name="commit" onclick=" RegistrationAjax(event)">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+              <div class="forgot login-footer">
+                <span>Don't have an account?
+                  <a href="javascript: showRegisterForm();">Create an Account</a>
+                </span>
+              </div>
+              <div class="forgot register-footer" style="display:none">
+                <span>Already have an account?</span>
+                <a href="javascript: showLoginForm();">Login</a>
+              </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/holder.min.js"></script>
+    <script src="js/main.js"></script>
