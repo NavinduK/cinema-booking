@@ -33,12 +33,10 @@
     <?php include 'carousel.php'; ?>
 
     <?php 
-    if (!empty($_SESSION['msg'])) {
+    if (!empty($_GET['msg'])) {
       echo "
-      <p style='font-family: cursive; text-align: center; color: #5c865c; font-size: 2vw;'>".$_SESSION['msg']."</p>
+      <p style='font-family: cursive; text-align: center; color: #5c865c; font-size: 2vw;'>".$_GET['msg']."</p>
       ";
-      $_SESSION['msg']="";
-      $_SESSION['movieId']="";
     }
     ?>
 
@@ -95,7 +93,8 @@
             } ?>
             </div>
           </div>
-    </div>
+        </div>
+      </div>
     <?php include 'footer.php'; ?>
   </body>
   </html>

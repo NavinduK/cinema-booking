@@ -20,11 +20,15 @@ function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
   const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
-  console.log(JSON.stringify(seatsIndex));
 
   localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
   const selectedSeatsCount = selectedSeats.length;
+  if (selectedSeatsCount <= 0) {
+    booknow.disabled = true;
+  } else {
+    booknow.disabled = false;
+  }
 
   count.innerText = selectedSeatsCount;
   total.innerText = selectedSeatsCount * ticketPrice;
@@ -35,15 +39,25 @@ function populateUI() {
   if (!("user" in localStorage))
     $('#loginModal').modal('show');
 
-  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+  const occupiedSeats = JSON.parse(localStorage.getItem('occupiedSeats'));
 
-  if (selectedSeats !== null && selectedSeats.length > 0) {
+  if (occupiedSeats !== null && occupiedSeats.length > 0) {
     seats.forEach((seat, index) => {
-      if (selectedSeats.indexOf(index) > -1) {
-        seat.classList.add('selected');
+      if (occupiedSeats.indexOf(index) > -1) {
+        seat.classList.add('occupied');
       }
     });
   }
+
+  // const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+
+  // if (selectedSeats !== null && selectedSeats.length > 0) {
+  //   seats.forEach((seat, index) => {
+  //     if (selectedSeats.indexOf(index) > -1) {
+  //       seat.classList.add('selected');
+  //     }
+  //   });
+  // }
 
   // const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
 
@@ -76,16 +90,15 @@ container.addEventListener('click', e => {
 
 // Seat click event
 booknow.addEventListener('click', e => {
-  $.post('logIn.php', { postName: userName, postPassword: password },
-    function (data) {
-      if (data.split(",")[0] == 1) {
-        localStorage.setItem('user', data.split(",")[1]);
-        window.location.replace("adminpage.php");
-      } else if (data.split(",")[0] == 2) {
-        localStorage.setItem('user', data.split(",")[1]);
-        location.reload();
-      } else {
-        shakeModal("Wrong Username or Password");
-      }
-    });
+  var seats = localStorage.getItem('selectedSeats').replace('[', '').replace(']', '');
+  if (!("user" in localStorage))
+    $('#loginModal').modal('show');
+  else
+    $.post('bookNow.php', { movieId: movieId, movieDate: movieDate, seats: seats },
+      function (res) {
+        if (res == 1)
+          window.location.replace("movie.php?id=" + movieId);
+        else
+          alert("Error occured!");
+      });
 });

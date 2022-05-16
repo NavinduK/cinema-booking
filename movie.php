@@ -2,7 +2,8 @@
 if (!session_id()) {
 	session_start();
 }
-include 'db.php'; ?>
+include 'db.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -11,8 +12,9 @@ include 'db.php'; ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/customerPanel.css">
 	<link rel="stylesheet" type="text/css" href="css/dark.css">
+	<link rel="stylesheet" type="text/css" href="css/rating.css">
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="css/style.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 
 	<style type="text/css">
 		.boxStyle {
@@ -30,7 +32,6 @@ include 'db.php'; ?>
 			font-size: 12px;
 			line-height: 16px;
 			font-family: Roboto, Helvetica, Arial, sans-serif;
-
 		}
 	</style>
 </head>
@@ -39,7 +40,7 @@ include 'db.php'; ?>
 	<?php include_once 'navbar.php'; ?>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12  toppad">
+			<div class="col-xs-12 toppad">
 				<div class="panel panel-info">
 					<h3 class="title">
 						<?php
@@ -83,11 +84,11 @@ include 'db.php'; ?>
 											<form action="booking.php" method="post">
 												<tr>
 													<td><strong>Date</strong></td>
-													<td><input required class="boxStyle" type="date" name="date"></td>
+													<td><input id="datePickerId" required class="boxStyle" type="date" name="date"></td>
 												</tr>
 												<tr>
 													<td colspan="2" width="100%">
-														<input value=<?php echo "'". $row['movieId']."'"; ?> type="hidden" name="id">
+														<input value=<?php echo "'" . $row['movieId'] . "'"; ?> type="hidden" name="id">
 														<input style="height: 40px" class="btn btn-primary btn-xs btn-block" type="submit" name="submit" value="Book a Ticket">
 													</td>
 												</tr>
@@ -101,17 +102,117 @@ include 'db.php'; ?>
 										<?php } ?>
 									</tbody>
 								</table>
-
 							</div>
 						</div>
-
 					</div>
+					<?php if ($row['catagory'] == 'now') { ?>
+						<div class="panel panel-info">
+							<hr style="border: 5px solid #000;">
+							<h3 class="title">
+								Rating and Comments
+							</h3>
+							<hr style="border: 5px solid #000;">
+							<div class="panel-body">
+								<div class="row">
+									<div class=" col-md-4 col-lg-4 col-sm-4 col-xs-6">
+										<h5 style="margin: 8px 0; text-align:center; color: #3472F7;">CINEMA RATING</h5>
+										<div class="container-r">
+											<h2 style="margin:0;font-size: 40px;">
+												<?php
+												$stmt = $conn->query("select avg(rating) as 'rating' from rating where movieId=$movieId;");
+												$rating = $stmt->fetch();
+												if ($rating)
+													echo round($rating['rating'], 1);
+												else
+													echo 0;
+												?>
+											</h2>
+											<h6 style="margin: 20px 0 0 5px; ">out of 5</h6>
+										</div>
+
+									</div>
+									<div class=" col-md-4 col-lg-4 col-sm-4 col-xs-6">
+										<h5 style="margin: 8px 0; text-align:center; color: #3472F7;">RATED COUNT</h5>
+										<div class="container-r">
+											<h2 style="margin:0; font-size: 40px;">
+												<?php
+												$stmt = $conn->query("select count(rating) as 'count' from rating where movieId=$movieId;");
+												$rating = $stmt->fetch();
+												if ($rating)
+													echo $rating['count'];
+												else
+													echo 0;
+												?>
+											</h2>
+											<h6 style="margin: 20px 0 0 5px; ">Ratings</h6>
+										</div>
+									</div>
+									<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+										<h5 style="margin: 8px 0; text-align:center; color: #3472F7;">CLICK TO RATE</h5>
+										<div class="container-r">
+											<div class="feedback">
+												<?php
+												if (isset($_SESSION['user'])) {
+													$movieId = $_GET['id'];
+													$userId = $_SESSION['user'];
+													$res = $conn->query("select * from booking where movieId=$movieId and userId=$userId;");
+													$row = $res->fetchAll(PDO::FETCH_ASSOC);
+													if (count($row) >= 1) {
+														$res2 = $conn->query("select * from rating where movieId=$movieId and userId=$userId;");
+														$row2 = $res2->fetch();
+														if (!$row2) {
+												?>
+															<div class="rating">
+																<input onchange="ratinghandler(this,<?php echo $movieId; ?>);" type="radio" name="rating" value="5" id="rating-5">
+																<label for="rating-5"></label>
+																<input onchange="ratinghandler(this,<?php echo $movieId; ?>);" type="radio" name="rating" value="4" id="rating-4">
+																<label for="rating-4"></label>
+																<input onchange="ratinghandler(this,<?php echo $movieId; ?>);" type="radio" name="rating" value="3" id="rating-3">
+																<label for="rating-3"></label>
+																<input onchange="ratinghandler(this,<?php echo $movieId; ?>);" type="radio" name="rating" value="2" id="rating-2">
+																<label for="rating-2"></label>
+																<input onchange="ratinghandler(this,<?php echo $movieId; ?>);" type="radio" name="rating" value="1" id="rating-1">
+																<label for="rating-1"></label>
+															</div>
+														<?php
+														} else {
+														?>
+															<div class="rating-d">
+																<input disabled type="radio" name="rating" value="5" id="rating-5" <?php if($row2['rating']==5) echo 'checked'; ?>>
+																<label for="rating-5"></label>
+																<input disabled type="radio" name="rating" value="4" id="rating-4" <?php if($row2['rating']==4) echo 'checked'; ?>>
+																<label for="rating-4"></label>
+																<input disabled type="radio" name="rating" value="3" id="rating-3" <?php if($row2['rating']==3) echo 'checked'; ?>>
+																<label for="rating-3"></label>
+																<input disabled type="radio" name="rating" value="2" id="rating-2" <?php if($row2['rating']==2) echo 'checked'; ?>>
+																<label for="rating-2"></label>
+																<input disabled type="radio" name="rating" value="1" id="rating-1" <?php if($row2['rating']==1) echo 'checked'; ?>>
+																<label for="rating-1"></label>
+															</div>
+													<?php
+														}
+													} else {
+														echo '<p style="margin:0;; text-align:center;">Book a ticket to rate this movie</p>';
+													}
+												} else {
+													echo '<p style="margin:0;; text-align:center;">Login to rate this movie</p>';
+												}
+												?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
 				</div>
 			</div>
 
 		</div>
 
 	</div>
+	<script src="./js/movie.js"></script>
+
 </body>
 
 </html>

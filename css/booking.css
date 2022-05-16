@@ -22,6 +22,11 @@ body {
   margin: 0;
 }
 
+#booknow:disabled{
+  background-color: grey!important;
+
+}
+
 .movie-container {
   margin: 20px 0;
 }

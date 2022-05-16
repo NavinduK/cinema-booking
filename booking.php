@@ -20,7 +20,7 @@ include 'db.php'; ?>
 <body>
   <?php include_once 'navbar.php'; ?>
   <?php
-  echo "<script>localStorage.removeItem('selectedSeats')</script>";
+  echo "<script>localStorage.removeItem('occupiedSeats')</script>";
   $movieId = $_POST['id'];
   $date = $_POST['date'];
   // $user = $_SESSION['user'];
@@ -32,7 +32,7 @@ include 'db.php'; ?>
       $seats = $seats . $row['seats'] . ",";
     }
     $seats = $seats . "]";
-    echo "<script>localStorage.setItem('selectedSeats',JSON.stringify(" . $seats . "))</script>";
+    echo "<script>localStorage.setItem('occupiedSeats',JSON.stringify(" . $seats . "))</script>";
   }
   ?>
   <div class="body">
@@ -43,6 +43,10 @@ include 'db.php'; ?>
         $row = $res->fetch();
         echo "" . $row['Name'];
         ?>
+        <script>
+            var movieDate = '<?php echo $date; ?>';
+            var movieId = <?php echo $row['movieId']; ?>;
+          </script>
       </h3>
       <div style="background-color: #fff; margin:0 auto;width:180px;color:#000;padding:5px;border-radius: 5px;">
           <span id="movieDate"><?php echo $date; ?></span> <span> at <?php echo $row['showTime']; ?> </span>
@@ -81,21 +85,11 @@ include 'db.php'; ?>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
       </div>
       <div class="row">
         <div class="seat"></div>
@@ -111,8 +105,8 @@ include 'db.php'; ?>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
@@ -122,9 +116,19 @@ include 'db.php'; ?>
         <div class="seat"></div>
         <div class="seat"></div>
         <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+      </div>
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
         <div class="seat"></div>
       </div>
     </div>
@@ -137,7 +141,7 @@ include 'db.php'; ?>
     </button>
   </div>
 
-  <script src="./js/script.js"></script>
+  <script src="./js/booking.js"></script>
 </body>
 
 </html>
