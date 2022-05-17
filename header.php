@@ -11,7 +11,7 @@ if (empty($_SESSION['user'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="js/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 	<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style type="text/css">

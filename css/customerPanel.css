@@ -1,8 +1,7 @@
 body {
-	padding-bottom: 40px;
 	color: #5a5a5a;
 	background-color: #000!important;
-  }
+}
 
 .user-row {
 	margin-bottom: 14px;
@@ -26,7 +25,6 @@ body {
 .dropdown-user:hover {
 	cursor: pointer;
 }
-
 
 .table-user-information > tbody > tr:first-child {
 	border-top: 0;

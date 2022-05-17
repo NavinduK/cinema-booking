@@ -15,7 +15,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="https://bootswatch.com/flatly/bootstrap.css" rel="stylesheet">
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="css/bootstrap-style.css" rel="stylesheet">
 </head>
 <!-- NAVBAR
   ================================================== -->

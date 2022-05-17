@@ -23,7 +23,7 @@ include 'db.php';
 
   <!-- Custom styles for this template -->
   <link href="css/rotating-card.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/bootstrap-style.css" rel="stylesheet">
   <link href="css/anotherDefault.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>

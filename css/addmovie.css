@@ -1,0 +1,40 @@
+.container-r{
+    margin: 30px 0;
+    text-align: center;
+}
+
+input,select,textarea{
+    width: 90%;
+    border: 1px solid #384250;
+    background: #242b34;
+    margin: 10px 0 5px!important;
+    padding: 10px;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 16px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: white!important;
+}
+
+select:disabled{
+    color: black!important;
+}
+
+@media (min-width:724px) {
+    input,select,textarea{
+        width: 55%;
+    }
+}
+
+.button-class{
+    margin: 0 20px;
+}
+
+input {
+    color-scheme: dark;
+}

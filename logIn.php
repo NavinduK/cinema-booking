@@ -16,8 +16,10 @@
     $_SESSION['user'] = $data['userId'];
     $account_type = $data['status'];
     if ($account_type === "101") {
+      $_SESSION['admin'] = 1;
       echo "1,".$data['userId']."";
     } else if ($account_type === "202") {
+      $_SESSION['admin'] = 0;
       echo "2,".$data['userId']."";
     }
   } else {

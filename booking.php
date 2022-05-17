@@ -13,7 +13,7 @@ include 'db.php'; ?>
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
   <link rel="stylesheet" href="css/booking.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/bootstrap-style.css" />
   <title>Movie Seat Booking</title>
 </head>
 

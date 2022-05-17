@@ -107,7 +107,7 @@ background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www
 .comments {
     width: 80%;
     margin: 30px auto 0 auto;
-    background: #000;
+    background: #222933;
     box-shadow: 0 1px 5px -1px rgb(0 0 0 / 13%);
     border-bottom: 1px solid #3472F7;
     border-radius: 10px;

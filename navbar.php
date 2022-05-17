@@ -38,10 +38,17 @@
                                 $userId = $_SESSION['user'];
                                 $res = $conn->query("select * from user where userId='$userId';");
                                 $row = $res->fetch();
-                                echo "
-                                <a href='#'>
-                                    <span class='glyphicon glyphicon-user'></span> " . $row['fname'] . " " . $row['lname'] . "
-                                </a>";
+                                if ($_SESSION['admin']==1) {
+                                    echo "
+                                    <a href='adminpage.php'>
+                                        <span class='glyphicon glyphicon-tasks'></span> Admin Dashboard
+                                    </a>";
+                                }else{
+                                    echo "
+                                    <a href='profile.php'>
+                                        <span class='glyphicon glyphicon-user'></span> " . $row['fname'] . " " . $row['lname'] . "
+                                    </a>";
+                                }
                             }
                             ?>
                         </li>

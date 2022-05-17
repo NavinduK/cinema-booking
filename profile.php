@@ -3,9 +3,6 @@ if (!session_id()) {
     session_start();
 }
 include 'db.php';
-$userId = $_SESSION['user'];
-$res = $conn->query("select * from user where userId='$userId';");
-$userData = $res->fetch();
 
 if (isset($_POST['csubmit'])) {
     $movieId = $_GET['id'];
@@ -16,6 +13,11 @@ if (isset($_POST['csubmit'])) {
 				values ($movieId, $userId, '$datetime', '$comment')";
     $conn->exec($sql);
 }
+
+$userId = $_SESSION['user'];
+$res = $conn->query("select * from user where userId='$userId';");
+$userData = $res->fetch();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +28,7 @@ if (isset($_POST['csubmit'])) {
     <link rel="stylesheet" type="text/css" href="css/customerPanel.css">
     <link rel="stylesheet" type="text/css" href="css/dark.css">
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap-style.css" rel="stylesheet">
 
     <style type="text/css">
         .boxStyle {
@@ -48,15 +50,16 @@ if (isset($_POST['csubmit'])) {
             background-color: #161b22!important;
             border: none;
         }
-        .glyphicon{
+        .icn{
             color: #3472F7;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
     <?php include_once 'navbar.php'; ?>
-    <div class="container">
+    <div  style="margin: 100px auto 10px auto!important;" class="container">
         <div class="row">
             <div class="col-xs-12 toppad">
                 <div class="panel panel-info">
@@ -64,45 +67,52 @@ if (isset($_POST['csubmit'])) {
                         <?php echo "" . $userData['fname'] . " " . $userData['lname']; ?>
                     </h3>
                     <hr style="border: 5px solid #000;">
-                    <div style="margin-top: 20px;" class="panel-body">
+                    <div style="margin: 50px 0;" class="panel-body">
                         <div class="row">
                             <div class="col-md-5 col-lg-5 " align="center">
-                                <img alt="User Pic" src=<?php
-                                                        if (isset($userData['image']))
-                                                            echo '"profileimages/' . $userData['image'] . '"';
-                                                        else
-                                                            echo 'images/profile.jpg';
-                                                        ?> class="img-responsive">
+                                <img width="275px" alt="User Pic" src=<?php
+                                    if (isset($userData['image']))
+                                        echo '"profileimages/' . $userData['image'] . '"';
+                                    else
+                                        echo 'images/profile.jpg';
+                                ?> class="img-responsive">
                             </div>
                             <div class=" col-md-7 col-lg-7 ">
                                 <table class="table table-user-information">
                                     <tbody>
                                         <tr>
                                             <td width="100px"><strong>First name</strong></td>
-                                            <td ><span id="e-fname" class='glyphicon glyphicon-edit'></span></td>
+                                            <td ><span id="e-fname" class='icn glyphicon glyphicon-edit'></span></td>
                                             <td>
-                                                <input disabled id="fname" class="boxStyle" value="<?php echo $userData['fname']; ?>" type="text">
+                                                <input disabled id="fname-u" class="boxStyle" value="<?php echo $userData['fname']; ?>" type="text">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong>Last name</strong></td>
-                                            <td><span id="e-lname" class='glyphicon glyphicon-edit'></span></td>
+                                            <td><span id="e-lname" class='icn glyphicon glyphicon-edit'></span></td>
                                             <td>
-                                                <input disabled id="lname" class="boxStyle" value="<?php echo $userData['lname']; ?>" type="text">
+                                                <input disabled id="lname-u" class="boxStyle" value="<?php echo $userData['lname']; ?>" type="text">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong>Email</strong></td>
-                                            <td><span id="e-email" class='glyphicon glyphicon-edit'></span></td>
+                                            <td><span id="e-email" class='icn glyphicon glyphicon-edit'></span></td>
                                             <td>
-                                                <input disabled id="email" class="boxStyle" value="<?php echo $userData['email']; ?>" type="email">
+                                                <input disabled id="email-u" class="boxStyle" value="<?php echo $userData['email']; ?>" type="email">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong>Password</strong></td>
-                                            <td><span id="e-password" class='glyphicon glyphicon-edit'></span></td>
+                                            <td><span id="e-password" class='icn glyphicon glyphicon-edit'></span></td>
                                             <td>
-                                                <input disabled id="password" class="boxStyle" value="********" type="text">
+                                                <input disabled id="password-u" class="boxStyle" value="********" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Password</strong></td>
+                                            <td><span id="e-password" class='icn glyphicon glyphicon-edit'></span></td>
+                                            <td>
+                                                <input disabled id="image-u" class="boxStyle" value="Click to edit" type="file">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -115,6 +125,8 @@ if (isset($_POST['csubmit'])) {
             </div>
         </div>
     </div>
+    <?php include_once 'footer.php'; ?>
+	<script src="./js/profile.js"></script>
 </body>
 
 </html>

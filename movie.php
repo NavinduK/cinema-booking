@@ -24,7 +24,7 @@ if (isset($_POST['csubmit'])) {
 	<link rel="stylesheet" type="text/css" href="css/dark.css">
 	<link rel="stylesheet" type="text/css" href="css/rating.css">
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-	<link href="css/style.css" rel="stylesheet">
+	<link href="css/bootstrap-style.css" rel="stylesheet">
 
 	<style type="text/css">
 		.boxStyle {
@@ -273,8 +273,8 @@ if (isset($_POST['csubmit'])) {
 			</div>
 
 		</div>
-
 	</div>
+	<?php include_once 'footer.php'; ?>
 	<script src="./js/movie.js"></script>
 
 </body>

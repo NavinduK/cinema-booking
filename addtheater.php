@@ -4,7 +4,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/registration.css">
-	<link rel="stylesheet" type="text/css" href="js/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<title>Add Theater</title>
 	<style type="text/css">
 		.boxStyle

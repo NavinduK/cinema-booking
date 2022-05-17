@@ -1,59 +1,50 @@
-<?php 
+<?php
 include 'db.php';
 if (!session_id()) {
 	session_start();
 }
-if (!(($_SESSION['user'])==1)) {
+if (!(($_SESSION['admin']) == 1)) {
 	header('Location: index.php');
 }
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Admin</title>
-	<link href="js/bootstrap.min.css" rel='stylesheet' type='text/css' />
-	<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/adminpage.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/adminpage.css" rel="stylesheet">
+	<link href="css/rotating-card.css" rel="stylesheet">
+	<link href="css/bootstrap-style.css" rel="stylesheet">
+	<link href="css/dark.css" rel="stylesheet">
 </head>
-<body style="background: #efc0c0" >
-	<!-- header-section-starts -->
-	<div class="header">
-		<div class="header-top-strip">
-			<div class="container">
-				<div class="header-top-left">
-					<ul>
-						<li>
-							<?php include 'header.php'; ?>
-						</li>			
-					</ul>
-				</div>
+
+<body style="background: #efc0c0">
+	<?php include 'navbar.php'; ?>
+	<div style="margin: 100px auto 80px auto;" class="container">
+		<div class="admin row" style="text-align:center">
+			<h3 style="margin-bottom: 50px">Admin Controls</h3>
+			<div class="btn-tp col-md-6">
+				<a style="width: 100%;" href="addMovie.php" class="myButton">Add Movie</a>
+			</div>
+			<div class="btn-btm col-md-6">
+				<a style="width: 100%;" href="addtheater.php" class="myButton">View Topups</a>
+			</div>
 			</div>
 		</div>
-		<?php 
-		if (!empty($_SESSION['msg'])) {
-			echo "
-			<p style='font-family: cursive; text-align: center; color: #5c865c; font-size: 2vw;'>".$_SESSION['msg']."</p>
-			";
-			$_SESSION['msg']="";
-
-		}
-		include 'profile.php';
-		?>
-		<div class="container" >
-			
-			<div class="row">
-				<div class="col-md-4">
-					<a style="width: 100%; text-align: center;" href="AddMovie.php" class="myButton">Add Movie</a>
-				</div>
-				<div  class="col-md-4">
-					<a style="width: 100%; text-align: center; margin-top: .5vw;" href="addtheater.php" class="myButton">Add Theater </a>
-				</div>
-				<div  class="col-md-4">
-					<a style="width: 100%; text-align: center; margin-top: .5vw;" href="addTimeSlot.php" class="myButton"> Add Time Slot </a>
-				</div>
-			</div> 
-
+	</div>
+	<hr style="border:2px solid #222933;">
+	<h3 style=" text-align:center;margin-bottom: 50px">Movies in the System</h3>
+	<div style="margin: 20px auto;" class="container">
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="nowshowing">
+				<?php include 'movieList.php' ?>
+			</div>
 		</div>
-	</body>
+	</div>
+</div>
 	<?php include 'footer.php'; ?>
-	</html>
+</body>
+
+</html>
