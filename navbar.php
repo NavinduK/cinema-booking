@@ -7,6 +7,7 @@
         border: 1px solid #2ca8ff;
     }
 </style>
+
 <div class="navbar-wrapper">
     <div>
 
@@ -75,7 +76,6 @@
             <h4 class="modal-title">Login</h4>
           </div>
 
-          <!-- login -->
           <div class="modal-body">  
             <div class="box">
               <div class="content">
@@ -83,22 +83,24 @@
                 <div class="error"></div>
                 <div class="form loginBox">
                   <form method="post" action="index.php" accept-charset="UTF-8">
-                    <input id="userName" class="form-control" type="text" placeholder="Username" name="Username">
-                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                    <input required id="userName" class="form-control" type="text" placeholder="Username" name="Username">
+                    <input required id="password" class="form-control" type="password" placeholder="Password" name="password">
                     <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
                   </form>
                 </div>
               </div>
             </div>
 
-            <!-- Registration -->
             <div class="box" id="RegistrationBox">
               <div class="content registerBox" style="display:none;">
                 <div class="form">
                   <form method="post" html="{:multipart=>true}" data-remote="true" action="index.php" accept-charset="UTF-8">
-                    <input id="registrationName" class="form-control" type="text" placeholder="username" name="username">
-                    <input id="registrationPassword" class="form-control" type="password" placeholder="Password" name="password">
-                    <input id="registrationPassword_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+                    <input id="fname" class="form-control" type="text" placeholder="First Name" name="fname">
+                    <input id="lname" class="form-control" type="text" placeholder="Last Name" name="lname">
+                    <input id="regEmail" class="form-control" type="email" placeholder="Email" name="email"
+                        pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
+                    <input id="regPassword" class="form-control" type="password" placeholder="Password" name="password">
+                    <input id="regPassword_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
                     <input class="btn btn-default btn-register" type="submit" value="Create account" name="commit" onclick=" RegistrationAjax(event)">
                   </form>
                 </div>
@@ -126,3 +128,4 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/holder.min.js"></script>
     <script src="js/main.js"></script>
+    <link href="css/dark.css" rel="stylesheet">

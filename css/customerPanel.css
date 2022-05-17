@@ -36,6 +36,11 @@ body {
 .table-user-information > tbody > tr > td {
 	border-top: 2px;
 }
-.toppad
-{margin-top:20px;
+.toppad{
+	margin-top:20px;
 }
+
+td {
+	height: 30px!important;
+	vertical-align: middle!important;
+  }

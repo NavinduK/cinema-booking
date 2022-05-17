@@ -1,72 +1,26 @@
-  <?php
-  if (!session_id()) {
-    session_start();
-  }
-  include_once ('db.php');
-
-
-
- /* $user="mamun";
- $pass="mamun";*/
-
-
- $user=$_REQUEST['postName'];
- $pass=$_REQUEST['postPassword'];
-
- if ($user=="" || $pass=="") {
-    echo "3";// trying to stop null input
-  }{
-
-    $usrNameUnique=true;
-    $sql="select userName from user;";
-    $res=$conn->query($sql);
-    while ($row=$res->fetch_assoc()) {
-      if ($user===$row['userName']) {
-        $usrNameUnique=false;
-        break;          
-      }         
+<?php
+    if (!session_id()) {
+        session_start();
     }
-    if (!($usrNameUnique)) {
+    include_once ('db.php');
 
-      echo "2";//username is not unique
+    $email=$_REQUEST['email'];
+    $pass=$_REQUEST['password'];
+    $fname=$_REQUEST['fname'];
+    $lname=$_REQUEST['lname'];
+
+    if ($email=="" || $pass=="") {
+        echo "0";
     }else{
-
-      echo "1";//registration complete
-      $data=new Deliveryman();
-      $var= $data->initialize($conn,$user,$pass);
-
+        $emailUnique=true;
+        $sql="select email from user where email = '$email';";
+        $res=$conn->query($sql);
+        if (!$res) {
+            echo "1";
+        }else{
+            $sql2="insert into user(email, password, status, fname, lname) values('$email','$pass',202,'$fname','$lname');";
+            $conn->exec($sql2);
+            echo "2";
+        }
     }
-  }
-
-
-  class Deliveryman
-  {
-
-    function initialize($conn,$user,$pass)
-    {
-      $sql="insert into user( userID,userName, password,status) values('',?,?,202);";
-
-      if (($stmt=$conn->prepare($sql))
-        ) {
-        $stmt->bind_param("ss",$userName,$password);
-
-
-    }else
-    {
-      var_dump($conn->error);
-
-    }
-
-    $userName=$user;
-    $password=$pass;
-
-
-    $stmt->execute();
-
-    $stmt->close();
-
-    
-  }
-}
-
 ?>

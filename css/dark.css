@@ -31,3 +31,8 @@ table input {
     justify-content: center;
     align-items: center;
 }
+
+.modal-content{
+    background-color: #222933!important;
+    border: 1px solid #3472F7;
+}

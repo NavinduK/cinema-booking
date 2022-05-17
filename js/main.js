@@ -3,9 +3,7 @@ function openRegisterModal() {
     setTimeout(function () {
         $('#loginModal').modal('show');
     }, 230);
-
 }
-
 
 function showRegisterForm() {
     $('.loginBox').fadeOut('fast', function () {
@@ -21,44 +19,54 @@ function showRegisterForm() {
 
 function RegistrationAjax(e) {
     $.post("registration.php", function () {
-        var userName = $('#registrationName').val();
-        var password = $('#registrationPassword').val();
-        var re_password = $('#registrationPassword_confirmation').val();
+        var fname = $('#fname').val();
+        var lname = $('#lname').val();
+        var email = $('#regEmail').val();
+        var password = $('#regPassword').val();
+        var re_password = $('#regPassword_confirmation').val();
 
-        if (!userName == "") {
+        if (!email == "") {
             if (!password == "") {
                 if (!re_password == "") {
                     if (!(password == re_password)) {
-                        shakeModal("password didn't match");
+                        shakeModal("Password didn't match each");
                     } else {
-                        $.post('registration.php', { postName: userName, postPassword: password },
+                        $.post('registration.php', { email: email, password: password, fname: fname, lname: lname },
                             function (data) {
-                                if (data == 1) {
+                                if (data == 2) {
                                     registrationComplete();
                                 }
-                                if (data == 2) {
-                                    shakeModal("username has been taken");
+                                if (data == 1) {
+                                    shakeModal("Email has been taken");
                                 }
-                                if (data == 3) {
-                                    alert("please try again");
+                                if (data == 0) {
+                                    alert("Please try again");
                                 }
                             });
                     }
-
                 } else {
-                    shakeModal("password confirmation cannot be empty");
+                    shakeModal("Repeat Password cannot be empty");
                 }
             } else {
-                shakeModal("password cannot be empty");
+                shakeModal("Password cannot be empty");
             }
         } else {
-            shakeModal("username cannot be empty");
+            shakeModal("Email cannot be empty");
         }
     });
     e.preventDefault();
-
 }
 
+function registrationComplete() {
+    $('#loginModal .modal-dialog').addClass('');
+    $('.error').addClass('alert successfully-submit').html("Registration Complete, Please LogIn");
+    $('input[type="password"]').val('');
+    $('input[type="text"]').val('');
+
+    setTimeout(function () {
+        $('#loginModal .modal-dialog').removeClass('');
+    }, 1000);
+}
 
 function openLoginModal() {
     showLoginForm();
@@ -86,7 +94,7 @@ function loginAjax(check) {
         var password = $('#password').val();
 
         if (userName == "" || password == "") {
-            shakeModal("Username or Password cannot be empty");
+            shakeModal("Username or Password Empty");
         } else {
             $.post('logIn.php', { postName: userName, postPassword: password },
                 function (data) {
@@ -111,17 +119,6 @@ function shakeModal(error) {
     $('input[type="text"]').val('');
     setTimeout(function () {
         $('#loginModal .modal-dialog').removeClass('shake');
-    }, 1000);
-}
-
-function registrationComplete() {
-    $('#loginModal .modal-dialog').addClass('');
-    $('.error').addClass('alert successfully-submit').html("Registration Complete,Please LogIn");
-    $('input[type="password"]').val('');
-    $('input[type="text"]').val('');
-
-    setTimeout(function () {
-        $('#loginModal .modal-dialog').removeClass('');
     }, 1000);
 }
 
