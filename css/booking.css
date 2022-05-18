@@ -16,7 +16,7 @@
 }
 body {
   height: 100vh;
-  background-color: #161b22;
+  background-color: #161b22!important;
   color: #fff!important;
   font-family: 'Lato', sans-serif;
   margin: 0;

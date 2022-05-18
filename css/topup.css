@@ -1,0 +1,144 @@
+.request-b {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+    margin: 17px auto 0 auto;
+    padding: 10px 30px;
+    background: transparent;
+    border: 2px solid #3472F7 !important;
+    border-radius: 3px;
+    color: #3472F7 !important;
+    cursor: pointer;
+}
+
+.requests {
+    width: 90%;
+    margin: 0 auto 30px auto;
+    background: #222933;
+    box-shadow: 0 1px 5px -1px rgb(0 0 0 / 13%);
+    border-bottom: 1px solid #3472F7;
+    border-radius: 10px;
+    display: flex;
+}
+
+.no-request{
+    margin: 40px auto 0 auto; 
+    font-size:15px; 
+    text-align:center; 
+    width:100%; 
+    color:#9e9e9e;
+}
+
+.user-name-a {
+    margin: 15px 0 0 0;
+    font-size: 18px;
+    font-weight: 400;
+    color: #3472F7 !important;
+}
+
+.amount-a {
+    margin: 5px 5px 15px 0;
+    font-size: 16px;
+    color: #3472F7 !important;
+}
+
+.accept{
+    height: 100%;
+    margin: auto 5vw auto auto;
+}
+
+.icn{
+    color: #3472F7 !important;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+  
+@media (min-width:724px) {
+    .request-q {
+        margin: 30px;
+    }
+    .requests {
+        width: 60%!important;
+    }
+    .boxStyle{
+        width:400px!important;
+    }
+}
+
+@media (max-width:724px) {
+    .amount-a {
+        font-size: 12px;
+    }
+    .user-name-a {
+        font-size: 13px;
+    }
+    .in-c{
+        justify-content: center!important;
+    }
+}
+  
+.tooltipa {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltipa .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(11, 11, 11);
+    color: #3472F7;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    margin-top: 4px;
+}
+  
+.tooltipa:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltipa .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+
+.container-r{
+    margin: 30px 0;
+    text-align: center;
+}
+
+input{
+    width: 90%;
+    border: 1px solid #384250;
+    background: #242b34;
+    margin: 10px 0 5px!important;
+    padding: 10px;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 16px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: white!important;
+}
+
+
+input {
+    color-scheme: dark;
+}
