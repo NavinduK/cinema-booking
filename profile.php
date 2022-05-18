@@ -3,27 +3,33 @@ if (!session_id()) {
     session_start();
 }
 include 'db.php';
+$userId = $_SESSION['user'];
 
-if (isset($_POST['csubmit'])) {
-    $movieId = $_GET['id'];
-    $comment = $_POST['comment'];
-    $datetime = date("Y/m/d") . " on " . date("h:i a");
-    $userId = $_SESSION['user'];
-    $sql =  "insert into comment (movieId, userId, datetime, comment)
-				values ($movieId, $userId, '$datetime', '$comment')";
-    $conn->exec($sql);
+if (isset($_FILES['image'])) {
+    echo "<script>alert('Received');</script>";
+
+	$target = "profileImages/" . basename($_FILES['image']['name']);
+	$image = $_FILES['image']['name'];
+	$image_tmp = $_FILES['image']['tmp_name'];
+	$sql = "update user set image ='$image' where userId=$userId;";
+	if ($conn->exec($sql)) {
+		if (move_uploaded_file($image_tmp, $target)) {
+			echo "<script>alert('Profile Image Successfully Added');</script>";
+		} else {
+			echo "<script>alert('Profile Image failed to add');</script>";
+		}
+	}
 }
 
-$userId = $_SESSION['user'];
 $res = $conn->query("select * from user where userId='$userId';");
 $userData = $res->fetch();
-
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Ticket</title>
+    <title>My Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/customerPanel.css">
     <link rel="stylesheet" type="text/css" href="css/dark.css">
@@ -71,13 +77,18 @@ $userData = $res->fetch();
                         <div class="row">
                             <div class="col-md-5 col-lg-5 " align="center">
                                 <img width="275px" alt="User Pic" src=<?php
-                                    if (isset($userData['image']))
+                                    if (!is_null($userData['image']))
                                         echo '"profileimages/' . $userData['image'] . '"';
                                     else
                                         echo 'images/profile.jpg';
                                 ?> class="img-responsive">
+                                <form id="profilePic" action="profile.php" method="post" enctype="multipart/form-data">
+                                    <div style="width: 100%; display: flex; justify-content:right; margin:10px 0;" class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                        <input accept="image/*" onchange="submitForm()" style="padding: 10px; width:200px; margin:0 auto" type="file" name="image" required>
+                                    </div>
+							    </form>
                             </div>
-                            <div class=" col-md-7 col-lg-7 ">
+                            <div style="margin-top: 20px!important;" class=" col-md-7 col-lg-7 ">
                                 <table class="table table-user-information">
                                     <tbody>
                                         <tr>
@@ -105,19 +116,12 @@ $userData = $res->fetch();
                                             <td><strong>Password</strong></td>
                                             <td><span id="e-password" class='icn glyphicon glyphicon-edit'></span></td>
                                             <td>
-                                                <input disabled id="password-u" class="boxStyle" value="********" type="text">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Password</strong></td>
-                                            <td><span id="e-password" class='icn glyphicon glyphicon-edit'></span></td>
-                                            <td>
-                                                <input disabled id="image-u" class="boxStyle" value="Click to edit" type="file">
+                                                <input disabled id="password-u" class="boxStyle" value=<?php echo $userData['password']; ?> type="password">
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <input style="height: 40px" class="btn btn-primary btn-xs btn-block" type="submit" name="submit" value="Update Profile">
+                                <input id="updateP" style="height: 40px" class="btn btn-primary btn-xs btn-block" type="submit" name="submit" value="Update Profile">
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,6 @@
 .btn:active{
     outline: 0 !important;
 }
-/* entire container, keeps perspective */
 .card-container {
 	  -webkit-perspective: 800px;
    -moz-perspective: 800px;
@@ -11,7 +10,6 @@
         perspective: 800px;
         margin-bottom: 30px;
 }
-/* flip the pane when hovered */
 .card-container:not(.manual-flip):hover .card,
 .card-container.hover.manual-flip .card{
 	-webkit-transform: rotateY( 180deg );
@@ -28,7 +26,6 @@
  -o-transform: none;
     transform: none;
 }
-/* flip speed goes here */
 .card {
 	 -webkit-transition: -webkit-transform .5s;
    -moz-transition: -moz-transform .5s;
@@ -40,8 +37,6 @@
         transform-style: preserve-3d;
 	position: relative;
 }
-
-/* hide back of pane during swap */
 .front, .back {
 	-webkit-backface-visibility: hidden;
    -moz-backface-visibility: hidden;
@@ -53,13 +48,9 @@
 	background-color: #FFF;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
 }
-
-/* front pane, placed above back */
 .front {
 	z-index: 2;
 }
-
-/* back, initially hidden pane */
 .back {
 		-webkit-transform: rotateY( 180deg );
    -moz-transform: rotateY( 180deg );
@@ -67,15 +58,11 @@
         transform: rotateY( 180deg );
         z-index: 3;
 }
-
 .back .btn-simple{
     position: absolute;
     left: 0;
     bottom: 4px;
 }
-/*        Style       */
-
-
 .card{
     background: none repeat scroll 0 0 #FFFFFF;
     border-radius: 4px;
@@ -115,9 +102,6 @@
     box-shadow: none;
     padding: 10px 20px 20px;
     text-align: left;
-}
-.card .content .main {
-    /* min-height: 160px; */
 }
 .card .name {
     font-size: 18px;
@@ -189,8 +173,6 @@
 .card .stats p{
 	color: #777777;
 }
-/*      Just for presentation        */
-
 .title{
     color: #506A85;
     text-align: center;
@@ -289,9 +271,6 @@
     color: #555;
 }
 
-
-/*       Fix bug for IE      */
-
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .front, .back{
         -ms-backface-visibility: visible;
@@ -300,7 +279,7 @@
 
     .back {
         visibility: hidden;
-        -ms-transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
+        transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
     }
     .front{
         z-index: 4;

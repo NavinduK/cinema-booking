@@ -21,7 +21,6 @@
 <!-- Custom styles for this template -->
 <link href="css/rotating-card.css" rel="stylesheet">
 <link href="css/bootstrap-style.css" rel="stylesheet">
-<link href="css/anotherDefault.css" rel="stylesheet">
 </head>
 <body >
     <!-- Carousel

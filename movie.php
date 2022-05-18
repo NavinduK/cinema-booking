@@ -18,10 +18,9 @@ if (isset($_POST['csubmit'])) {
 <html>
 
 <head>
-	<title>Ticket</title>
+	<title>Movie</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/customerPanel.css">
-	<link rel="stylesheet" type="text/css" href="css/dark.css">
 	<link rel="stylesheet" type="text/css" href="css/rating.css">
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<link href="css/bootstrap-style.css" rel="stylesheet">
