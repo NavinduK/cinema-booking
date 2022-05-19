@@ -6,7 +6,7 @@ const booknow = document.getElementById('booknow');
 const movieSelect = document.getElementById('movie');
 
 let ticketPrice = 20;
-
+var selectedSeatsCount = 0;
 populateUI();
 
 // Save selected movie index and price
@@ -23,7 +23,7 @@ function updateSelectedCount() {
 
   localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
-  const selectedSeatsCount = selectedSeats.length;
+  selectedSeatsCount = selectedSeats.length;
   if (selectedSeatsCount <= 0) {
     booknow.disabled = true;
   } else {
@@ -93,8 +93,10 @@ booknow.addEventListener('click', e => {
   var seats = localStorage.getItem('selectedSeats').replace('[', '').replace(']', '');
   if (!("user" in localStorage))
     $('#loginModal').modal('show');
+  else if (accBalance < (selectedSeatsCount * ticketPrice))
+    alert('Credit Not enough, Please topup first!');
   else
-    $.post('bookNow.php', { movieId: movieId, movieDate: movieDate, seats: seats },
+    $.post('bookNow.php', { movieId: movieId, movieDate: movieDate, seats: seats, total : (selectedSeatsCount * ticketPrice) },
       function (res) {
         if (res == 1)
           window.location.replace("movie.php?id=" + movieId);

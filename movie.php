@@ -94,6 +94,9 @@ if (isset($_POST['csubmit'])) {
 												<tr>
 													<td><strong>Date</strong></td>
 													<td><input id="datePickerId" required class="boxStyle" type="date" name="date"></td>
+													<script>
+														datePickerId.min = new Date().toISOString().split("T")[0];
+													</script>
 												</tr>
 												<tr>
 													<td colspan="2" width="100%">
@@ -226,7 +229,7 @@ if (isset($_POST['csubmit'])) {
 												<form action="movie.php?id=<?php echo $_GET['id'] ?>" method="POST">
 													<div class="title">
 														<h5 style="margin: 8px 0; text-align:center; color: #3472F7;">LEAVE A COMMENT</h5>
-														<textarea maxlength="150" rows="2" name="comment" placeholder="Enter your comment here..." required></textarea>
+														<textarea maxlength="2000" rows="2" name="comment" placeholder="Enter your comment here..." required></textarea>
 													</div>
 													<input type="submit" name="csubmit" value="Post Your Comment" class="comment-b">
 												</form>

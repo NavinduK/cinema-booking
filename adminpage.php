@@ -20,7 +20,7 @@ if (!(($_SESSION['admin']) == 1)) {
 	<link href="css/dark.css" rel="stylesheet">
 </head>
 
-<body style="background: #efc0c0">
+<body>
 	<?php include 'navbar.php'; ?>
 	<div style="margin: 100px auto 80px auto;" class="container">
 		<div class="admin row" style="text-align:center">
@@ -29,7 +29,7 @@ if (!(($_SESSION['admin']) == 1)) {
 				<a style="width: 100%;" href="addMovie.php" class="myButton">Add Movie</a>
 			</div>
 			<div class="btn-btm col-md-6">
-				<a style="width: 100%;" href="addtheater.php" class="myButton">View Topups</a>
+				<a style="width: 100%;" href="topupReq.php" class="myButton">View Topups</a>
 			</div>
 			</div>
 		</div>

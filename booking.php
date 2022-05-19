@@ -45,6 +45,8 @@ include 'db.php'; ?>
         <script>
             var movieDate = '<?php echo $date; ?>';
             var movieId = <?php echo $row['movieId']; ?>;
+            if ("user" in localStorage)
+              var accBalance = <?php echo $userData['accBalance']; ?>;
           </script>
       </h3>
       <div style="background-color: #fff; margin:0 auto;width:180px;color:#000;padding:5px;border-radius: 5px;">

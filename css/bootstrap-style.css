@@ -1963,8 +1963,21 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 }
 
 @media (min-width:992px){
-.movieRow{
-  display:flex;
-  justify-content:center;
+  .movieRow{
+    display:flex;
+    justify-content:center;
+  }
 }
+
+@media (max-width:992px){
+  .web-banner{
+    display: none;
+  }
+  .mobile-banner{
+    display: block!important;
+  }
+}
+
+.mobile-banner{
+  display: none;
 }

@@ -6,7 +6,7 @@ include 'db.php';
 $userId = $_SESSION['user'];
 
 if (isset($_FILES['image'])) {
-    echo "<script>alert('Received');</script>";
+    // echo "<script>alert('Received');</script>";
 
 	$target = "profileImages/" . basename($_FILES['image']['name']);
 	$image = $_FILES['image']['name'];
@@ -14,7 +14,7 @@ if (isset($_FILES['image'])) {
 	$sql = "update user set image ='$image' where userId=$userId;";
 	if ($conn->exec($sql)) {
 		if (move_uploaded_file($image_tmp, $target)) {
-			echo "<script>alert('Profile Image Successfully Added');</script>";
+			// echo "<script>alert('Profile Image Successfully Added');</script>";
 		} else {
 			echo "<script>alert('Profile Image failed to add');</script>";
 		}

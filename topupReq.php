@@ -2,6 +2,9 @@
 if (!session_id()) {
     session_start();
 }
+if (!(($_SESSION['admin'])==1)) {
+	header('Location: index.php');
+}
 include 'db.php';
 
 if (isset($_POST['csubmit'])) {

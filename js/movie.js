@@ -1,5 +1,3 @@
-datePickerId.min = new Date().toISOString().split("T")[0];
-
 function ratinghandler(e, movieId) {
     var rating = e.value;
 

@@ -22,8 +22,10 @@ include_once('db.php');
 
 <body>
   <?php include 'navbar.php'; ?>
+  <img width="100%" class="web-banner" src="images/banner.jpg" alt="">
+  <img width="100%" class="mobile-banner" src="images/banner-mobile.jpg" alt="">
 
-  <div style="margin-top: 70px" class="container">
+  <div style="margin-top: 50px" class="container">
     <div class="tab-content">
       <div class="tab-pane fade in active" id="nowshowing">
         <?php include 'movieList.php' ?>

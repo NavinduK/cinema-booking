@@ -33,11 +33,11 @@
               if (isset($_SESSION['user'])) {
                 $userId = $_SESSION['user'];
                 $res = $conn->query("select * from user where userId='$userId';");
-                $row = $res->fetch();
-                if ($row && $_SESSION['admin'] != 1) {
+                $userData = $res->fetch();
+                if ($userData && $_SESSION['admin'] != 1) {
                   echo "
                     <a href='topup.php'>
-                        Credit: $".$row['accBalance']."
+                        Credit: $".$userData['accBalance']."
                     </a>";
                 }
               }
@@ -54,7 +54,7 @@
                 } else {
                   echo "
                     <a href='profile.php'>
-                        <span class='glyphicon glyphicon-user'></span> " . $row['fname'] . " " . $row['lname'] . "
+                        <span class='glyphicon glyphicon-user'></span> " . $userData['fname'] . " " . $userData['lname'] . "
                     </a>";
                 }
               }
@@ -65,7 +65,7 @@
               if (isset($_SESSION['user'])) {
                 $userId = $_SESSION['user'];
                 $res = $conn->query("select * from user where userId='$userId';");
-                $row = $res->fetch();
+                $userData = $res->fetch();
                 echo "
                                         <a href='logout.php' onclick='return logout()'><span class='glyphicon glyphicon-off'></span> Logout </a>";
               } else {
